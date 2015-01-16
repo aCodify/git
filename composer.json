@@ -2,7 +2,7 @@
     "name": "rhildred/Git.php",
     "autoload": {
         "psr-0": {
-            "kbjr": "."
+            "": ""
         }
 
     }
