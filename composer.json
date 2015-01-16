@@ -1,3 +1,8 @@
 {
-    "name": "rhildred/Git.php"
+    "name": "rhildred/Git.php",
+    "autoload": {
+        "psr-0": {
+            "": ""
+        }
+    }
 }
