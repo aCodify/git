@@ -1,6 +1,9 @@
 {
     "name": "kbjr/Git.php",
     "autoload": {
-        "classmap": ["Git.php"]
+        "psr-0": {
+            "kbjr": "."
+        }
+
     }
 }
