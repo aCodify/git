@@ -28,7 +28,7 @@ class GitServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('git');
 	}
 
 }

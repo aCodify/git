@@ -34,7 +34,7 @@ class Git {
 			mkdir($realPath);
 		
 		if (file_exists($repo_path."/.git") && is_dir($repo_path."/.git")) {
-			throw new Exception('"'.$repo_path.'" is already a git repository.', 409);
+			throw new \Exception('"'.$repo_path.'" is already a git repository.', 409);
 		} else {
 			self::$instance = new self;
 			
@@ -54,28 +54,33 @@ class Git {
 			if (self::$instance === null)
 	            self::$instance = new self;	
 	            
-			if (is_dir($repo_path)) {
+			if (is_dir($realPath)) {
 				// Is this a work tree?
-				if (file_exists($repo_path."/.git") && is_dir($repo_path."/.git")) {
-					self::$instance->repo_path = $repo_path;
+				if (file_exists($realPath."/.git") && is_dir($realPath."/.git")) {
+					self::$instance->path = $realPath;
 					self::$instance->bare = false;
 				// Is this a bare repo?
-				} else if (is_file($repo_path."/config")) {
-				  $parse_ini = parse_ini_file($repo_path."/config");
+				} else if (is_file($realPath."/config")) {
+				  $parse_ini = parse_ini_file($realPath."/config");
 					if ($parse_ini['bare']) {
-						self::$instance->repo_path = $repo_path;
+						self::$instance->repo_path = $realPath;
 						self::$instance->bare = true;
 					}
 				} else {
-					throw new Exception('"'.$repo_path.'" is not a git repository.', 406);
+					throw new \Exception('"'.$repo_path.'" is not a git repository.', 406);
 				}
 			} else {
-				throw new Exception('"'.$repo_path.'" is not a directory.', 404);
+				throw new \Exception('"'.$repo_path.'" is not a directory.', 404);
 			}
 			return self::$instance;
 		} else {
-			throw new Exception('Repository folder '.$realPath.' does not exists.', 404);
+			throw new \Exception('Repository folder '.$realPath.' does not exists.', 404);
 		}
+	}
+	
+	public function lastCommit(){
+		$status = self::$instance->run("show --'format={\"hash\": \"%H\", \"author\": \"%an\", \"message\": \"%s\"}'");
+		return json_decode(substr($status, 0, strpos($status, 'diff --git')));
 	}
 
 	/**
@@ -145,7 +150,7 @@ class Git {
 		}
 
 		$status = trim(proc_close($resource));
-		if ($status) throw new Exception($stderr);
+		if ($status) throw new \Exception($stderr);
 
 		return $stdout;
 	}
@@ -483,6 +488,10 @@ class Git {
 	 */
 	public function setenv($key, $value) {
 		$this->envopts[$key] = $value;
+	}
+	
+	public function isServer(){
+		return $this->bare;
 	}
 
 }
