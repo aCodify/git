@@ -1,8 +1,20 @@
 {
-    "name": "rhildred/Git.php",
+    "name": "yoozon/git",
+    "description": "",
+    "authors": [
+        {
+            "name": "Yoozon",
+            "email": "contact@yoozon.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
     "autoload": {
         "psr-0": {
-            "": ""
+            "Yoozon\\Git": "src/"
         }
-    }
+    },
+    "minimum-stability": "stable"
 }
