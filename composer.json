@@ -1,10 +1,10 @@
 {
     "name": "yoozon/git",
-    "description": "",
+    "description": "Git for PHP and Laravel",
     "authors": [
         {
-            "name": "Yoozon",
-            "email": "contact@yoozon.com"
+            "name": "Pedro Santiago",
+            "email": "pedro@yoozon.com"
         }
     ],
     "require": {
