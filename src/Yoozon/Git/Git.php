@@ -72,7 +72,6 @@ class Git {
 			} else {
 				throw new Exception('"'.$repo_path.'" is not a directory.', 404);
 			}
-			
 			return self::$instance;
 		} else {
 			throw new Exception('Repository folder '.$realPath.' does not exists.', 404);
